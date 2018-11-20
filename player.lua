@@ -1,48 +1,39 @@
 local player = {}
-
-player.width = 50
+player.width = 50 -- meters
 player.height = 50
-player.acceleration = 0.2
-player.mass = 100
-player.friction = 0.96
-player.velocity = {
-    x = 0,
-    y = 0,
-}
-player.position = {
-    x = love.graphics.getWidth() / 2,
-    y = love.graphics.getHeight() / 2,
-}
+player.mass = 150 -- kilograms
+player.acceleration = 400
+player.position = {}
+player.position.x = love.graphics.getWidth() / 2
+player.position.y = love.graphics.getHeight() / 2
 
-function player.update(dt)
-    vector = { x = 0, y = 0 }
-
-    -- get relative velocity
-    if love.keyboard.isDown("up") then
-        vector.y = vector.y - player.acceleration * dt
-    end
-    if love.keyboard.isDown("down") then
-        vector.y = vector.y + player.acceleration * dt
-    end
-
-    if love.keyboard.isDown("right") then
-        vector.x = vector.x + player.acceleration * dt
-    end
-    if love.keyboard.isDown("left") then
-        vector.x = vector.x - player.acceleration * dt
-    end
-
-    -- update player velocity
-    player.velocity.x = player.velocity.x * player.friction + vector.x * player.mass
-    player.velocity.y = player.velocity.y * player.friction + vector.y * player.mass
-
-    -- update player position
-    player.position.x = player.position.x + player.velocity.x
-    player.position.y = player.position.y + player.velocity.y
+function player:draw()
+    love.graphics.polygon('fill', self.physics.body:getWorldPoints(self.physics.shape:getPoints()))
 end
 
-function player.draw()
-    love.graphics.rectangle('fill', player.position.x, player.position.y, player.width, player.height)
+function player:initPhysics(world)
+    self.physics = {}
+    self.physics.body = love.physics.newBody(world, self.position.x, self.position.y, 'dynamic')
+    self.physics.body:setMass(self.mass)
+    self.physics.shape = love.physics.newRectangleShape( self.width, self.height )
+    self.physics.fixture = love.physics.newFixture( self.physics.body, self.physics.shape, 1.0 )
+    self.physics.fixture:setFriction(0.5)
+end
+
+function player:update(dt)
+    if love.keyboard.isDown("up") then
+        self.physics.body:applyForce(0, -self.acceleration)
+    end
+    if love.keyboard.isDown("down") then
+        self.physics.body:applyForce(0, self.acceleration)
+    end
+
+    if love.keyboard.isDown("left") then
+        self.physics.body:applyForce(-self.acceleration, 0)
+    end
+    if love.keyboard.isDown("right") then
+        self.physics.body:applyForce(self.acceleration, 0)
+    end
 end
 
 return player

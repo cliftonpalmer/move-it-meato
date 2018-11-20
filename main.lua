@@ -55,6 +55,11 @@ function love.draw()
 end
 
 function love.update(dt)
+    -- global commands
+    if love.keyboard.isDown("escape") then
+        love.event.quit()
+    end
+
     player.update(dt)
 end
 

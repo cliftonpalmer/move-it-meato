@@ -1,10 +1,12 @@
 local player = require 'player'
+local block = require 'block'
 
 function love.load()
 end
 
 function love.draw()
     player.draw()
+    block.draw()
 end
 
 function love.update(dt)
@@ -14,6 +16,7 @@ function love.update(dt)
     end
 
     player.update(dt)
+    block.update(dt)
 end
 
 function love.quit()

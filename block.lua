@@ -1,6 +1,6 @@
 local block = {}
 block.width = 25
-block.height = 75
+block.height = 50
 block.mass = 10 -- kilograms
 block.damping = 0.8
 block.friction = 0.8

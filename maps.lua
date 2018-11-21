@@ -11,8 +11,8 @@ maps.sequence = {
 local blocks = require 'blocks'
 for row_index, row in pairs(maps.sequence) do
     for col_index, value in pairs(row) do
-        local block_x = row_index * love.graphics.getWidth() / 10
-        local block_y = col_index * love.graphics.getHeight() / 5
+        local block_x = row_index * love.graphics.getWidth() / #maps.sequence[1]
+        local block_y = col_index * love.graphics.getHeight() / #maps.sequence
         blocks:add_block(block_x, block_y)
     end
 end

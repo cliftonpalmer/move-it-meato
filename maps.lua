@@ -1,5 +1,8 @@
-local maps = {}
+require 'blocks'
+
+maps = {}
 maps.index = 1
+maps.blocks = Blocks:new()
 maps.sequence = {
     { 0, 1, 0, 1, 0, 0, 1, 0, 0, 0 },
     { 0, 1, 0, 1, 1, 0, 1, 0, 1, 0 },
@@ -14,8 +17,6 @@ maps.sequence = {
     { 1, 0, 1, 0, 0, 1, 1, 0, 0, 0 },
 }
 
-local blocks = require 'blocks'
-
 local grid_width = love.graphics.getWidth() / #maps.sequence
 local grid_height = love.graphics.getHeight() / #maps.sequence[1]
 
@@ -24,11 +25,10 @@ for row_index, row in pairs(maps.sequence) do
         if value > 0 then
             local block_x = row_index * grid_width + grid_width / 2
             local block_y = col_index * grid_height + grid_height / 2
-            blocks:add_block(block_x, block_y)
+            maps.blocks:add_block(block_x, block_y)
         end
     end
 end
-maps.blocks = blocks
 
 function maps:draw()
     self.blocks:draw()

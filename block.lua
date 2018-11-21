@@ -1,15 +1,15 @@
-local block = {}
-block.width = 25
-block.height = 50
-block.mass = 10 -- kilograms
-block.damping = 0.8
-block.friction = 0.8
+Block = {}
+Block.width = 25
+Block.height = 50
+Block.mass = 10 -- kilograms
+Block.damping = 0.8
+Block.friction = 0.8
 
-block.position = {}
-block.position.x = 0
-block.position.y = 0
+Block.position = {}
+Block.position.x = 0
+Block.position.y = 0
 
-function block:new(x, y)
+function Block:new(x, y)
     o = { position = {} }
     o.position.x = x
     o.position.y = y
@@ -19,12 +19,12 @@ function block:new(x, y)
     return o
 end
 
-function block:draw()
+function Block:draw()
     love.graphics.setColor(0, 0, 255)
     love.graphics.polygon('fill', self.physics.body:getWorldPoints(self.physics.shape:getPoints()))
 end
 
-function block:physics(world)
+function Block:physics(world)
     self.physics = {}
 
     self.physics.body = love.physics.newBody(world, self.position.x, self.position.y, 'dynamic')
@@ -37,5 +37,3 @@ function block:physics(world)
     self.physics.fixture = love.physics.newFixture( self.physics.body, self.physics.shape, 1.0 )
     self.physics.fixture:setFriction(self.friction)
 end
-
-return block

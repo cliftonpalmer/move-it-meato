@@ -13,7 +13,7 @@ function player:draw()
     love.graphics.polygon('fill', self.physics.body:getWorldPoints(self.physics.shape:getPoints()))
 end
 
-function player:initPhysics(world)
+function player:physics(world)
     self.physics = {}
 
     self.physics.body = love.physics.newBody(world, self.position.x, self.position.y, 'dynamic')

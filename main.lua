@@ -4,12 +4,13 @@ local velocityiterations = 8
 local positioniterations = 3
 
 local player = require 'player'
-local block = require 'block'
+local Block = require 'block'
+local block = Block:new(150, 250)
 
 -- main
 function love.load()
-    player:initPhysics(world)
-    block:initPhysics(world)
+    player:physics(world)
+    block:physics(world)
 end
 
 function love.draw()

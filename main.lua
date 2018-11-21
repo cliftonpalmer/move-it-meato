@@ -1,15 +1,24 @@
--- physics
-local world = require 'world'
-local velocityiterations = 8
-local positioniterations = 3
-
-local player = require 'player'
-local maps = require 'maps'
-
 -- main
 function love.load()
+    world = require 'world'
+    velocityiterations = 8
+    positioniterations = 3
+    world:setCallbacks(beginContact, endContact, preSolve, postSolve)
+
+    player = require 'player'
+    maps = require 'maps'
+
+    -- init physics
     player:physics(world)
     maps:physics(world)
+end
+
+function beginContact(a, b, co)
+    if player.fixture == a then
+        print('Collision between player and '..tostring(b)..'!')
+    elseif player.fixture == b then
+        print('Collision between player and '..tostring(a)..'!')
+    end
 end
 
 function love.draw()

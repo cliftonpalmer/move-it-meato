@@ -1,4 +1,5 @@
 Cargo = {}
+Cargo.name = 'cargo'
 
 function Cargo:new(x, y, width, height, mass)
     o = {}
@@ -16,19 +17,18 @@ end
 
 function Cargo:draw()
     love.graphics.setColor(0, 255, 0)
-    love.graphics.polygon('fill', self.physics.body:getWorldPoints(self.physics.shape:getPoints()))
+    love.graphics.polygon('fill', self.body:getWorldPoints(self.shape:getPoints()))
 end
 
 function Cargo:physics(world)
-    self.physics = {}
-    self.physics.damping = 0.7
+    self.damping = 0.7
 
-    self.physics.body = love.physics.newBody(world, self.position.x, self.position.y, 'dynamic')
-    self.physics.body:setMass(self.mass)
-    self.physics.body:setAngularDamping(self.physics.damping)
-    self.physics.body:setLinearDamping(self.physics.damping)
+    self.body = love.physics.newBody(world, self.position.x, self.position.y, 'dynamic')
+    self.body:setMass(self.mass)
+    self.body:setAngularDamping(self.damping)
+    self.body:setLinearDamping(self.damping)
 
-    self.physics.shape = love.physics.newRectangleShape(self.width, self.height)
+    self.shape = love.physics.newRectangleShape(self.width, self.height)
 
-    self.physics.fixture = love.physics.newFixture(self.physics.body, self.physics.shape, 1.0)
+    self.fixture = love.physics.newFixture(self.body, self.shape, 1.0)
 end

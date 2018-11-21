@@ -1,4 +1,5 @@
 local player = {}
+player.name = 'player'
 player.width = 50 -- meters
 player.height = 50
 player.mass = 150 -- kilograms
@@ -13,42 +14,40 @@ player.position.y = love.graphics.getHeight() / 2
 
 function player:draw()
     love.graphics.setColor(255, 0, 0)
-    love.graphics.polygon('fill', self.physics.body:getWorldPoints(self.physics.shape:getPoints()))
+    love.graphics.polygon('fill', self.body:getWorldPoints(self.shape:getPoints()))
 end
 
 function player:physics(world)
-    self.physics = {}
+    self.body = love.physics.newBody(world, self.position.x, self.position.y, 'dynamic')
+    self.body:setAngularDamping(self.damping)
+    self.body:setLinearDamping(self.damping)
 
-    self.physics.body = love.physics.newBody(world, self.position.x, self.position.y, 'dynamic')
-    self.physics.body:setAngularDamping(self.damping)
-    self.physics.body:setLinearDamping(self.damping)
+    self.shape = love.physics.newRectangleShape( self.width, self.height )
 
-    self.physics.shape = love.physics.newRectangleShape( self.width, self.height )
-
-    self.physics.fixture = love.physics.newFixture( self.physics.body, self.physics.shape, 1.0 )
-    self.physics.fixture:setFriction(player.friction)
+    self.fixture = love.physics.newFixture( self.body, self.shape, 1.0 )
+    self.fixture:setFriction(player.friction)
 end
 
 function player:update(dt)
     if love.keyboard.isDown("w") then
-        self.physics.body:applyForce(0, -self.acceleration)
+        self.body:applyForce(0, -self.acceleration)
     end
     if love.keyboard.isDown("s") then
-        self.physics.body:applyForce(0, self.acceleration)
+        self.body:applyForce(0, self.acceleration)
     end
 
     if love.keyboard.isDown("a") then
-        self.physics.body:applyForce(-self.acceleration, 0)
+        self.body:applyForce(-self.acceleration, 0)
     end
     if love.keyboard.isDown("d") then
-        self.physics.body:applyForce(self.acceleration, 0)
+        self.body:applyForce(self.acceleration, 0)
     end
 
     if love.keyboard.isDown("right") then
-        self.physics.body:applyAngularImpulse(self.torque)
+        self.body:applyAngularImpulse(self.torque)
     end
     if love.keyboard.isDown("left") then
-        self.physics.body:applyAngularImpulse(-self.torque)
+        self.body:applyAngularImpulse(-self.torque)
     end
 end
 

@@ -1,4 +1,5 @@
 Block = {}
+Block.name = 'block'
 Block.width = 25
 Block.height = 50
 Block.mass = 10 -- kilograms
@@ -21,19 +22,17 @@ end
 
 function Block:draw()
     love.graphics.setColor(0, 0, 255)
-    love.graphics.polygon('fill', self.physics.body:getWorldPoints(self.physics.shape:getPoints()))
+    love.graphics.polygon('fill', self.body:getWorldPoints(self.shape:getPoints()))
 end
 
 function Block:physics(world)
-    self.physics = {}
+    self.body = love.physics.newBody(world, self.position.x, self.position.y, 'dynamic')
+    self.body:setMass(self.mass)
+    self.body:setAngularDamping(self.damping)
+    self.body:setLinearDamping(self.damping)
 
-    self.physics.body = love.physics.newBody(world, self.position.x, self.position.y, 'dynamic')
-    self.physics.body:setMass(self.mass)
-    self.physics.body:setAngularDamping(self.damping)
-    self.physics.body:setLinearDamping(self.damping)
+    self.shape = love.physics.newRectangleShape( self.width, self.height )
 
-    self.physics.shape = love.physics.newRectangleShape( self.width, self.height )
-
-    self.physics.fixture = love.physics.newFixture( self.physics.body, self.physics.shape, 1.0 )
-    self.physics.fixture:setFriction(self.friction)
+    self.fixture = love.physics.newFixture( self.body, self.shape, 1.0 )
+    self.fixture:setFriction(self.friction)
 end

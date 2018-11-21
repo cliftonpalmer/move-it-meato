@@ -5,6 +5,7 @@ player.mass = 150 -- kilograms
 player.friction = 0.8
 player.damping = 0.1
 player.acceleration = 400
+player.torque = 100
 player.position = {}
 player.position.x = love.graphics.getWidth() / 2
 player.position.y = love.graphics.getHeight() / 2
@@ -28,18 +29,25 @@ function player:physics(world)
 end
 
 function player:update(dt)
-    if love.keyboard.isDown("up") then
+    if love.keyboard.isDown("w") then
         self.physics.body:applyForce(0, -self.acceleration)
     end
-    if love.keyboard.isDown("down") then
+    if love.keyboard.isDown("s") then
         self.physics.body:applyForce(0, self.acceleration)
     end
 
-    if love.keyboard.isDown("left") then
+    if love.keyboard.isDown("a") then
         self.physics.body:applyForce(-self.acceleration, 0)
     end
-    if love.keyboard.isDown("right") then
+    if love.keyboard.isDown("d") then
         self.physics.body:applyForce(self.acceleration, 0)
+    end
+
+    if love.keyboard.isDown("right") then
+        self.physics.body:applyAngularImpulse(self.torque)
+    end
+    if love.keyboard.isDown("left") then
+        self.physics.body:applyAngularImpulse(-self.torque)
     end
 end
 

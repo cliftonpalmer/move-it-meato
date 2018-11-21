@@ -20,6 +20,7 @@ function block:new(x, y)
 end
 
 function block:draw()
+    love.graphics.setColor(0, 0, 255)
     love.graphics.polygon('fill', self.physics.body:getWorldPoints(self.physics.shape:getPoints()))
 end
 

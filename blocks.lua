@@ -1,4 +1,5 @@
 require 'block'
+require 'cargo'
 
 Blocks = {}
 Blocks.sequence = {}
@@ -12,6 +13,11 @@ end
 
 function Blocks:add_block(x, y)
     table.insert(self.sequence, Block:new(x, y))
+end
+
+function Blocks:add_cargo(x, y, width, height, mass)
+    cargo = Cargo:new(x, y, width, height, mass)
+    table.insert(self.sequence, cargo)
 end
 
 function Blocks:draw()

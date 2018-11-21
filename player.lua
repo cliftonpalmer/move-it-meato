@@ -7,11 +7,6 @@ player.damping = 0.9
 player.acceleration = 400
 player.torque = 100
 
-player.cargo = {}
-player.cargo.width = 25
-player.cargo.height = 25
-player.cargo.mass = 50
-
 player.position = {}
 player.position.x = love.graphics.getWidth() / 2
 player.position.y = love.graphics.getHeight() / 2
@@ -19,24 +14,18 @@ player.position.y = love.graphics.getHeight() / 2
 function player:draw()
     love.graphics.setColor(255, 0, 0)
     love.graphics.polygon('fill', self.physics.body:getWorldPoints(self.physics.shape:getPoints()))
-    love.graphics.setColor(0, 255, 0)
-    love.graphics.polygon('fill', self.physics.body:getWorldPoints(self.physics.cargo.shape:getPoints()))
 end
 
 function player:physics(world)
     self.physics = {}
-    self.physics.cargo = {}
 
     self.physics.body = love.physics.newBody(world, self.position.x, self.position.y, 'dynamic')
-    self.physics.body:setMass(self.mass + self.cargo.mass)
     self.physics.body:setAngularDamping(self.damping)
     self.physics.body:setLinearDamping(self.damping)
 
     self.physics.shape = love.physics.newRectangleShape( self.width, self.height )
-    self.physics.cargo.shape = love.physics.newRectangleShape( (self.width + self.cargo.width) / 2, 0, self.cargo.width, self.cargo.height )
 
     self.physics.fixture = love.physics.newFixture( self.physics.body, self.physics.shape, 1.0 )
-    self.physics.cargo.fixture = love.physics.newFixture( self.physics.body, self.physics.cargo.shape, 1.0 )
     self.physics.fixture:setFriction(player.friction)
 end
 

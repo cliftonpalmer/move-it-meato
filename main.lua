@@ -1,3 +1,13 @@
+function player_grip_fixture(f)
+    print('Creating joint')
+    player.joint = love.physics.newDistanceJoint(
+        player.fixture:getBody(), f:getBody(),
+        0, 0, 10, 0,
+        false
+        )
+end
+love.handlers.player_grip_fixture = player_grip_fixture
+
 -- main
 function love.load()
     world = require 'world'
@@ -14,10 +24,19 @@ function love.load()
 end
 
 function beginContact(a, b, co)
+    local other_fixture
+
     if player.fixture == a then
-        print('Collision between player and '..tostring(b)..'!')
+        other_fixture = b
     elseif player.fixture == b then
-        print('Collision between player and '..tostring(a)..'!')
+        other_fixture = a
+    else
+        return
+    end
+
+    print('Player collided with '..tostring(other_fixture))
+    if not player.joint and love.keyboard.isDown('lshift') then
+        love.event.push('player_grip_fixture', other_fixture)
     end
 end
 

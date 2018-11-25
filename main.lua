@@ -1,5 +1,4 @@
 function player_grip_fixture(f)
-    print('Creating joint')
     local body1 = player.fixture:getBody()
     local body2 = f:getBody()
     local x, y = body1:getWorldCenter()
@@ -33,7 +32,6 @@ function beginContact(a, b, co)
         return
     end
 
-    print('Player collided with '..tostring(other_fixture))
     if not player.joint and love.keyboard.isDown('lshift') then
         love.event.push('player_grip_fixture', other_fixture)
     end

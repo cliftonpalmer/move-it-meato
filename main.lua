@@ -1,10 +1,9 @@
 function player_grip_fixture(f)
     print('Creating joint')
-    player.joint = love.physics.newDistanceJoint(
-        player.fixture:getBody(), f:getBody(),
-        0, 0, 10, 0,
-        false
-        )
+    local body1 = player.fixture:getBody()
+    local body2 = f:getBody()
+    local x, y = body1:getWorldCenter()
+    player.joint = love.physics.newDistanceJoint(body1, body2, x, y, x + 10, y + 10, true)
 end
 love.handlers.player_grip_fixture = player_grip_fixture
 

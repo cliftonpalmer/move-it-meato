@@ -4,7 +4,7 @@ player.width = 50 -- meters
 player.height = 50
 player.mass = 150 -- kilograms
 player.damping = 0.9
-player.acceleration = 400
+player.acceleration = 600
 player.torque = 100
 
 player.position = {}
@@ -46,6 +46,17 @@ function player:update(dt)
     end
     if love.keyboard.isDown("left") then
         self.body:applyAngularImpulse(-self.torque)
+    end
+
+    if self.joint
+    and love.timer.getTime() > self.joint_created
+    and love.keyboard.isDown("up") then
+        print('Destroying joint')
+        local joint = self.joint
+        joint:destroy()
+        joint:release()
+        self.joint_created = nil
+        self.joint = nil
     end
 end
 

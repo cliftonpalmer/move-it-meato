@@ -3,6 +3,7 @@ function player_grip_fixture(f)
     local body2 = f:getBody()
     local x, y = body1:getWorldCenter()
     player.joint = love.physics.newPrismaticJoint(body1, body2, x, y, x + 10, y + 10, true)
+    player.joint_created = love.timer.getTime() + 1.0
 end
 love.handlers.player_grip_fixture = player_grip_fixture
 
@@ -32,7 +33,7 @@ function beginContact(a, b, co)
         return
     end
 
-    if not player.joint and love.keyboard.isDown('lshift') then
+    if not player.joint and love.keyboard.isDown('up') then
         love.event.push('player_grip_fixture', other_fixture)
     end
 end

@@ -4,8 +4,8 @@ maps = {}
 maps.index = 1
 maps.blocks = Blocks:new()
 maps.sequence = {
-    { 2, 1, 0, 1, 0, 0, 1, 0, 0, 0 },
-    { 0, 1, 0, 1, 1, 0, 1, 0, 1, 0 },
+    { 3, 1, 0, 1, 0, 0, 1, 0, 0, 0 },
+    { 0, 2, 0, 1, 1, 0, 1, 0, 1, 0 },
     { 0, 0, 1, 1, 1, 1, 1, 0, 1, 0 },
     { 1, 1, 0, 1, 1, 0, 0, 0, 1, 0 },
     { 1, 1, 1, 1, 0, 0, 1, 0, 0, 0 },
@@ -29,6 +29,8 @@ for row_index, row in pairs(maps.sequence) do
                 maps.blocks:add_block(x, y)
             elseif value == 2 then
                 maps.blocks:add_cargo(x, y, 30, 30, 50)
+            elseif value == 3 then
+                maps.blocks:add_wall(x, y, 30, 500)
             end
         end
     end

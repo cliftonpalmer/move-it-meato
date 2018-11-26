@@ -1,4 +1,5 @@
 Block = {}
+Block.name = 'block'
 Block.color = {0, 0, 255}
 Block.width = 10
 Block.height = 10

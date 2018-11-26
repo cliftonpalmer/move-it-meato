@@ -1,15 +1,16 @@
 require 'block'
 
 Player = Block:new()
+Player.name = 'player'
+Player.color = {255, 0, 0}
+Player.width = 50
+Player.height = 50
+Player.mass = 150
+Player.acceleration = 600
+Player.torque = 100
 
 function Player:new(x, y)
     o = {}
-    o.color = {255, 0, 0}
-    o.width = 50
-    o.height = 50
-    o.mass = 150
-    o.acceleration = 600
-    o.torque = 100
     o.position = {x=x, y=y}
 
     setmetatable(o, self)

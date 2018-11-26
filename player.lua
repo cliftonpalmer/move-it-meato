@@ -9,15 +9,6 @@ Player.mass = 150
 Player.acceleration = 600
 Player.torque = 100
 
-function Player:new(x, y)
-    o = {}
-    o.position = {x=x, y=y}
-
-    setmetatable(o, self)
-    self.__index = self
-    return o
-end
-
 function Player:update(dt)
     if love.keyboard.isDown("w") then
         self.body:applyForce(0, -self.acceleration)

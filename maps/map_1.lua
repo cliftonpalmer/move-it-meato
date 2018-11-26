@@ -8,7 +8,7 @@ local width = love.graphics.getWidth()
 local height = love.graphics.getHeight()
 
 local map = {}
-map.player = Player:new(width/2, height/2)
+map.player = Player:new({position={x=width/2, y=height/2}})
 
 local blocks = {}
 table.insert(blocks, map.player)

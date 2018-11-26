@@ -21,7 +21,9 @@ function beginContact(a, b, co)
         return
     end
 
-    if not player.joint and love.keyboard.isDown('up') then
+    if love.keyboard.isDown('up')
+    and not player.joint
+    and other_fixture:getBody():getType() ~= 'static' then
         love.event.push('player_grip_fixture', other_fixture)
     end
 end

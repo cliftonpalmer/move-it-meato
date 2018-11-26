@@ -2,15 +2,13 @@ require 'block'
 
 Cargo = Block:new()
 Cargo.name = 'cargo'
+Cargo.color = {0, 255, 0}
+Cargo.width = 50
+Cargo.height = 50
+Cargo.mass = 25
 
-function Cargo:new(x, y)
-    o = {}
-    o.color = {0, 0, 255}
-    o.width = 50
-    o.height = 50
-    o.mass = 25
-    o.position = {x=x, y=y}
-
+function Cargo:new(o)
+    o = o or {}
     setmetatable(o, self)
     self.__index = self
     return o

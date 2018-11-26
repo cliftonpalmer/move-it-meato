@@ -5,9 +5,9 @@ Player.name = 'player'
 Player.color = {255, 0, 0}
 Player.width = 50
 Player.height = 50
-Player.mass = 150
+Player.mass = 100
 Player.acceleration = 600
-Player.torque = 100
+Player.torque = 200
 
 function Player:update(dt)
     if love.keyboard.isDown("w") then

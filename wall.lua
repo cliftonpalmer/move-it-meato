@@ -1,20 +1,19 @@
 Wall = {}
+Wall.color = {255, 255, 255}
+Wall.width = 20
+Wall.height = 80
+Wall.position = {x=0, y=0}
 
-function Wall:new(x, y, width, height)
-    o = {}
-    o.width = width
-    o.height = height
-    o.position = {}
-    o.position.x = x
-    o.position.y = y
-
+function Wall:new(o)
+    o = o or {}
+    print(o)
     setmetatable(o, self)
     self.__index = self
     return o
 end
 
 function Wall:draw()
-    love.graphics.setColor(255, 255, 255)
+    love.graphics.setColor(self.color)
     love.graphics.polygon('line', self.body:getWorldPoints(self.shape:getPoints()))
 end
 

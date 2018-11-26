@@ -1,47 +1,29 @@
-require 'blocks'
+-- maps
 
-maps = {}
-maps.index = 1
-maps.blocks = Blocks:new()
-maps.sequence = {
-    { 3, 1, 0, 1, 0, 0, 1, 0, 0, 0 },
-    { 0, 2, 0, 1, 1, 0, 1, 0, 1, 0 },
-    { 0, 0, 1, 1, 1, 1, 1, 0, 1, 0 },
-    { 1, 1, 0, 1, 1, 0, 0, 0, 1, 0 },
-    { 1, 1, 1, 1, 0, 0, 1, 0, 0, 0 },
-    { 1, 1, 1, 1, 1, 0, 1, 0, 0, 0 },
-    { 1, 1, 1, 1, 0, 1, 1, 0, 0, 0 },
-    { 1, 1, 1, 0, 0, 1, 1, 0, 0, 0 },
-    { 1, 0, 1, 0, 1, 1, 1, 0, 0, 0 },
-    { 1, 0, 1, 0, 1, 1, 1, 0, 0, 0 },
-    { 1, 0, 1, 0, 0, 1, 1, 0, 0, 0 },
-}
+Maps = {}
+Maps.index = 1
 
-local grid_width = love.graphics.getWidth() / #maps.sequence
-local grid_height = love.graphics.getHeight() / #maps.sequence[1]
+function Maps:loadNext()
+    self.loaded = require 'maps/map_1'
+    self.index = self.index + 1
+end
 
-for row_index, row in pairs(maps.sequence) do
-    for col_index, value in pairs(row) do
-        if value > 0 then
-            local x = row_index * grid_width + grid_width / 2
-            local y = col_index * grid_height + grid_height / 2
-            if value == 1 then
-                maps.blocks:add_block(x, y)
-            elseif value == 2 then
-                maps.blocks:add_cargo(x, y, 30, 30, 50)
-            elseif value == 3 then
-                maps.blocks:add_wall(x, y, 30, 500)
-            end
-        end
+function Maps:draw()
+    for i, block in pairs(self.loaded.blocks) do
+        block:draw()
     end
 end
 
-function maps:draw()
-    self.blocks:draw()
+function Maps:physics(world)
+    for i, block in pairs(self.loaded.blocks) do
+        block:physics(world)
+    end
 end
 
-function maps:physics(world)
-    self.blocks:physics(world)
+function Maps:update(dt)
+    for i, block in pairs(self.loaded.blocks) do
+        if block['update'] then
+            block:update(dt)
+        end
+    end
 end
-
-return maps

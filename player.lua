@@ -1,32 +1,23 @@
-local player = {}
-player.name = 'player'
-player.width = 50 -- meters
-player.height = 50
-player.mass = 150 -- kilograms
-player.damping = 0.9
-player.acceleration = 600
-player.torque = 100
+require 'block'
 
-player.position = {}
-player.position.x = love.graphics.getWidth() / 2
-player.position.y = love.graphics.getHeight() / 2
+Player = Block:new()
 
-function player:draw()
-    love.graphics.setColor(255, 0, 0)
-    love.graphics.polygon('fill', self.body:getWorldPoints(self.shape:getPoints()))
+function Player:new(x, y)
+    o = {}
+    o.color = {255, 0, 0}
+    o.width = 50
+    o.height = 50
+    o.mass = 150
+    o.acceleration = 600
+    o.torque = 100
+    o.position = {x=x, y=y}
+
+    setmetatable(o, self)
+    self.__index = self
+    return o
 end
 
-function player:physics(world)
-    self.body = love.physics.newBody(world, self.position.x, self.position.y, 'dynamic')
-    self.body:setAngularDamping(self.damping)
-    self.body:setLinearDamping(self.damping)
-
-    self.shape = love.physics.newRectangleShape( self.width, self.height )
-
-    self.fixture = love.physics.newFixture( self.body, self.shape, 1.0 )
-end
-
-function player:update(dt)
+function Player:update(dt)
     if love.keyboard.isDown("w") then
         self.body:applyForce(0, -self.acceleration)
     end
@@ -59,5 +50,3 @@ function player:update(dt)
         self.joint = nil
     end
 end
-
-return player

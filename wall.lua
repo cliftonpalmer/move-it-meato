@@ -1,11 +1,4 @@
 Wall = {}
-Wall.name = 'wall'
-Wall.width = 25
-Wall.height = 50
-
-Wall.position = {}
-Wall.position.x = 0
-Wall.position.y = 0
 
 function Wall:new(x, y, width, height)
     o = {}

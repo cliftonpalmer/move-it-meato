@@ -3,15 +3,21 @@
 require 'block'
 require 'player'
 require 'wall'
+require 'goal'
 
 local width = love.graphics.getWidth()
 local height = love.graphics.getHeight()
 
 local map = {}
 map.player = Player:new({position={x=width-40, y=40}})
+map.goal = Goal:new({position=map.player.position, width=60, height=10})
 
 local blocks = {}
+-- player
 table.insert(blocks, map.player)
+
+-- goal
+table.insert(blocks, map.goal)
 
 -- bounding box
 table.insert(blocks, Wall:new({position={x=0, y=height/2}, width=20, height=height-30}))

@@ -11,6 +11,7 @@ function love.load()
 
     Maps:loadNext()
     player = Maps.loaded.player
+    goal = Maps.loaded.goal
     Maps:physics(world)
 end
 

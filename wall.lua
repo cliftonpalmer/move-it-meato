@@ -6,7 +6,6 @@ Wall.position = {x=0, y=0}
 
 function Wall:new(o)
     o = o or {}
-    print(o)
     setmetatable(o, self)
     self.__index = self
     return o

@@ -32,5 +32,8 @@ func _physics_process(delta):
 	velocity.x *= FRICTION
 	velocity.y *= FRICTION
 	
+	# face the direction I'm moving
+	rotation = velocity.angle()
+	
 	# apply force
 	move_and_slide(velocity)

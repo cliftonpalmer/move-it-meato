@@ -6,6 +6,7 @@ extends KinematicBody2D
 const ACCELERATION = 2
 const MASS = 10
 const FRICTION = 0.95
+const MAX_ROTATION = PI / 20
 
 var velocity = Vector2()
 
@@ -33,7 +34,10 @@ func _physics_process(delta):
 	velocity.y *= FRICTION
 	
 	# face the direction I'm moving
-	rotation = velocity.angle()
+	var new_rotation = velocity.angle()
+	if abs(rotation - new_rotation) > MAX_ROTATION:
+		new_rotation = rotation + MAX_ROTATION
+	rotation = new_rotation
 	
 	# apply force
 	move_and_slide(velocity)

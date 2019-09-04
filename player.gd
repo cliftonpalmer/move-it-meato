@@ -33,11 +33,24 @@ func _physics_process(delta):
 	velocity.x *= FRICTION
 	velocity.y *= FRICTION
 	
-	# face the direction I'm moving
-	var new_rotation = velocity.angle()
-	if abs(rotation - new_rotation) > MAX_ROTATION:
-		new_rotation = rotation + MAX_ROTATION
-	rotation = new_rotation
+	# face the direction player indicates
+	var new_rotation = Vector2()
+
+	if Input.is_action_pressed("rot_right"):
+		new_rotation.x = 1
+	elif Input.is_action_pressed("rot_left"):
+		new_rotation.x = -1
+
+	if Input.is_action_pressed("rot_up"):
+		new_rotation.y = -1
+	elif Input.is_action_pressed("rot_down"):
+		new_rotation.y = 1
+
+	if new_rotation:
+		new_rotation = new_rotation.angle()
+		if abs(rotation - new_rotation) > MAX_ROTATION:
+			new_rotation = rotation + MAX_ROTATION
+		rotation = new_rotation
 	
 	# apply force
 	move_and_slide(velocity)

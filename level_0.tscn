@@ -12,4 +12,20 @@ position = Vector2( 74, 53 )
 [node name="moveable" parent="." instance=ExtResource( 2 )]
 position = Vector2( 163, 133 )
 
-[node name="wall" parent="." instance=ExtResource( 3 )]
+[node name="walls" type="Node2D" parent="."]
+editor/display_folded = true
+
+[node name="wall" parent="walls" instance=ExtResource( 3 )]
+scale = Vector2( 1, 30 )
+
+[node name="wall3" parent="walls" instance=ExtResource( 3 )]
+position = Vector2( 20, 0 )
+scale = Vector2( 50, 1 )
+
+[node name="wall4" parent="walls" instance=ExtResource( 3 )]
+position = Vector2( 20, 580 )
+scale = Vector2( 50, 1 )
+
+[node name="wall2" parent="walls" instance=ExtResource( 3 )]
+position = Vector2( 1010, 0 )
+scale = Vector2( 1, 30 )

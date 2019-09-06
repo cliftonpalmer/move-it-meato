@@ -48,9 +48,25 @@ func _physics_process(delta):
 
 	if new_rotation:
 		new_rotation = new_rotation.angle()
-		if abs(rotation - new_rotation) > MAX_ROTATION:
-			new_rotation = rotation + MAX_ROTATION
-		rotation = new_rotation
+		
+		# how many degrees do i need to rotate and in what direction?
+		var d1 = abs(rotation - new_rotation)
+		var d2 = abs(2 * PI - d1)
+		var diff_left = null
+		var diff_right = null
+		
+		
+		if new_rotation > rotation:
+			diff_right = d1
+			diff_left = d2
+		else:
+			diff_right = d2
+			diff_left = d1
+			
+		if diff_right < diff_left:
+			rotation += MAX_ROTATION if diff_right > MAX_ROTATION else diff_right
+		elif diff_right > diff_left:
+			rotation -= MAX_ROTATION if diff_left > MAX_ROTATION else diff_left
 	
 	# apply force
 	move_and_slide(velocity)

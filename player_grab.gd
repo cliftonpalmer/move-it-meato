@@ -12,10 +12,19 @@ func _ready():
 #func _process(delta):
 #	pass
 
+var grabbed = null
+
+func reparent(body):
+	body.get_parent().remove_child(body)
+	$grab.add_child(body)
+	
 
 func _on_player_grab_body_entered(body):
-	if body.name == "moveable" and not $holder.node_b:
-		$holder.node_b = body.get_path()
+	if body is RigidBody2D and not grabbed:
+		(body as RigidBody2D).mode = RigidBody2D.MODE_KINEMATIC
+		grabbed = body
+		call_deferred("reparent", body)
+		print("Grabbed " + (body as RigidBody2D).name)
 
 
 func _on_player_grab_body_exited(body):

@@ -15,9 +15,6 @@ extents = Vector2( 15.3237, 26.3022 )
 [node name="player" type="KinematicBody2D" parent="."]
 position = Vector2( 30, 30 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Sprite" type="Sprite" parent="player"]
 position = Vector2( -9.53674e-07, 9.53674e-07 )
@@ -40,15 +37,11 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="grab area" type="CollisionShape2D" parent="player/player_grab"]
+[node name="grab" type="CollisionShape2D" parent="player/player_grab"]
 position = Vector2( 50, 0 )
 shape = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="holder" type="PinJoint2D" parent="player/player_grab"]
-position = Vector2( 50, 0 )
-node_a = NodePath("../..")
 [connection signal="body_entered" from="player/player_grab" to="player/player_grab" method="_on_player_grab_body_entered"]
 [connection signal="body_exited" from="player/player_grab" to="player/player_grab" method="_on_player_grab_body_exited"]

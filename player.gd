@@ -6,7 +6,7 @@ extends KinematicBody2D
 const ACCELERATION = 2
 const MASS = 10
 const FRICTION = 0.95
-const MAX_ROTATION = PI / 20
+const MAX_ROTATION = PI / 40
 
 var velocity = Vector2()
 

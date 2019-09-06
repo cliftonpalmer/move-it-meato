@@ -15,6 +15,10 @@ func _ready():
 
 func _on_player_grab_body_entered(body):
 	print(body.name + " entered")
+	if body.name == "moveable" and not $holder.node_b:
+		body.position.x = position.x
+		body.position.y = position.y
+		$holder.node_b = body.get_path()
 	pass # Replace with function body.
 
 

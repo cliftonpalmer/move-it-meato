@@ -55,7 +55,6 @@ func _physics_process(delta):
 		var diff_left = null
 		var diff_right = null
 		
-		
 		if new_rotation > rotation:
 			diff_right = d1
 			diff_left = d2

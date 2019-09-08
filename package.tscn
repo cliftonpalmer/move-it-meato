@@ -2,7 +2,8 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 
-[node name="moveable" type="RigidBody2D"]
+[node name="package" type="RigidBody2D"]
+mode = 3
 gravity_scale = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -12,8 +13,8 @@ __meta__ = {
 }
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color( 0.752941, 0.827451, 0.211765, 1 )
-polygon = PoolVector2Array( -10, -10, 10, -10, 10, 10, -10, 10 )
+color = Color( 0.176471, 0.843137, 0.282353, 1 )
+polygon = PoolVector2Array( -10, 10, -10, -10, 10, -10, 10, 10 )
 __meta__ = {
 "_edit_lock_": true
 }

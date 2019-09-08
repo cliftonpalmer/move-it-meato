@@ -21,7 +21,7 @@ position = Vector2( 70, 70 )
 position = Vector2( 50, 0 )
 
 [node name="goal" parent="." instance=ExtResource( 4 )]
-position = Vector2( 980, 560 )
+position = Vector2( 970, 550 )
 
 [node name="exterior_walls" type="Node2D" parent="."]
 editor/display_folded = true

@@ -12,7 +12,10 @@ func _ready():
 #func _process(delta):
 #	pass
 
-
-func _on_goal_area_entered(area):
-	print("You entered the goal!")
+var won = false
+func _on_goal_body_entered(body):
+	if body is RigidBody2D:
+		if (body as RigidBody2D).name == "package" and not won:
+			print("You won!")
+			won = true
 	pass # Replace with function body.

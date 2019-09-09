@@ -3,9 +3,9 @@
 [ext_resource path="res://level_0.gd" type="Script" id=1]
 [ext_resource path="res://player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://package.tscn" type="PackedScene" id=3]
-[ext_resource path="res://goal.tscn" type="PackedScene" id=4]
-[ext_resource path="res://exterior_wall.tscn" type="PackedScene" id=5]
-[ext_resource path="res://moveable.tscn" type="PackedScene" id=6]
+[ext_resource path="res://exterior_wall.tscn" type="PackedScene" id=4]
+[ext_resource path="res://moveable.tscn" type="PackedScene" id=5]
+[ext_resource path="res://goal.tscn" type="PackedScene" id=6]
 
 [node name="level_0" type="Node2D"]
 script = ExtResource( 1 )
@@ -20,9 +20,6 @@ position = Vector2( 70, 70 )
 [node name="package" parent="player" instance=ExtResource( 3 )]
 position = Vector2( 50, 0 )
 
-[node name="goal" parent="." instance=ExtResource( 4 )]
-position = Vector2( 970, 550 )
-
 [node name="exterior_walls" type="Node2D" parent="."]
 editor/display_folded = true
 __meta__ = {
@@ -30,19 +27,19 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="exterior_wall" parent="exterior_walls" instance=ExtResource( 5 )]
+[node name="exterior_wall" parent="exterior_walls" instance=ExtResource( 4 )]
 position = Vector2( 0, 300 )
 scale = Vector2( 1, 30.24 )
 
-[node name="exterior_wall2" parent="exterior_walls" instance=ExtResource( 5 )]
+[node name="exterior_wall2" parent="exterior_walls" instance=ExtResource( 4 )]
 position = Vector2( 1020, 300 )
 scale = Vector2( 1, 30.24 )
 
-[node name="exterior_wall3" parent="exterior_walls" instance=ExtResource( 5 )]
+[node name="exterior_wall3" parent="exterior_walls" instance=ExtResource( 4 )]
 position = Vector2( 510, 600 )
 scale = Vector2( 52, 1 )
 
-[node name="exterior_wall4" parent="exterior_walls" instance=ExtResource( 5 )]
+[node name="exterior_wall4" parent="exterior_walls" instance=ExtResource( 4 )]
 position = Vector2( 510, 0 )
 scale = Vector2( 52, 1 )
 
@@ -53,5 +50,26 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="moveable" parent="moveables" instance=ExtResource( 6 )]
+[node name="moveable" parent="moveables" instance=ExtResource( 5 )]
 position = Vector2( 160, 150 )
+
+[node name="goal" parent="." instance=ExtResource( 6 )]
+position = Vector2( 970, 550 )
+
+[node name="win_label" type="Node2D" parent="goal"]
+editor/display_folded = true
+visible = false
+position = Vector2( -460, -260 )
+
+[node name="Polygon2D" type="Polygon2D" parent="goal/win_label"]
+color = Color( 0.211765, 0.192157, 0.192157, 1 )
+polygon = PoolVector2Array( -520, 320, -520, -300, 520, -300, 520, 320 )
+
+[node name="Label" type="Label" parent="goal/win_label"]
+margin_left = -340.0
+margin_top = -50.0
+margin_right = 360.0
+margin_bottom = 40.0
+text = "YOU WON"
+align = 1
+valign = 1

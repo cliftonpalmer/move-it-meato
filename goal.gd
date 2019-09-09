@@ -17,5 +17,6 @@ func _on_goal_body_entered(body):
 	if body is RigidBody2D:
 		if (body as RigidBody2D).name == "package" and not won:
 			print("You won!")
+			$win_label.visible = true
 			won = true
 	pass # Replace with function body.

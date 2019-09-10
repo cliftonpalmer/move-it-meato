@@ -44,16 +44,78 @@ position = Vector2( 510, 0 )
 scale = Vector2( 52, 1 )
 
 [node name="moveables" type="Node2D" parent="."]
-editor/display_folded = true
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
 
-[node name="moveable" parent="moveables" instance=ExtResource( 5 )]
-position = Vector2( 160, 150 )
+[node name="row" type="Node2D" parent="moveables"]
+editor/display_folded = true
+
+[node name="moveable" parent="moveables/row" instance=ExtResource( 5 )]
+position = Vector2( 190, 110 )
+
+[node name="moveable4" parent="moveables/row" instance=ExtResource( 5 )]
+position = Vector2( 190, 270 )
+
+[node name="moveable6" parent="moveables/row" instance=ExtResource( 5 )]
+position = Vector2( 190, 430 )
+
+[node name="moveable2" parent="moveables/row" instance=ExtResource( 5 )]
+position = Vector2( 190, 190 )
+
+[node name="moveable3" parent="moveables/row" instance=ExtResource( 5 )]
+position = Vector2( 190, 350 )
+
+[node name="moveable5" parent="moveables/row" instance=ExtResource( 5 )]
+position = Vector2( 190, 510 )
+
+[node name="row2" type="Node2D" parent="moveables"]
+editor/display_folded = true
+position = Vector2( 130, 0 )
+
+[node name="moveable" parent="moveables/row2" instance=ExtResource( 5 )]
+position = Vector2( 190, 110 )
+
+[node name="moveable4" parent="moveables/row2" instance=ExtResource( 5 )]
+position = Vector2( 190, 270 )
+
+[node name="moveable6" parent="moveables/row2" instance=ExtResource( 5 )]
+position = Vector2( 190, 430 )
+
+[node name="moveable2" parent="moveables/row2" instance=ExtResource( 5 )]
+position = Vector2( 190, 190 )
+
+[node name="moveable3" parent="moveables/row2" instance=ExtResource( 5 )]
+position = Vector2( 190, 350 )
+
+[node name="moveable5" parent="moveables/row2" instance=ExtResource( 5 )]
+position = Vector2( 190, 510 )
+
+[node name="row3" type="Node2D" parent="moveables"]
+editor/display_folded = true
+position = Vector2( 260, 0 )
+
+[node name="moveable" parent="moveables/row3" instance=ExtResource( 5 )]
+position = Vector2( 190, 110 )
+
+[node name="moveable4" parent="moveables/row3" instance=ExtResource( 5 )]
+position = Vector2( 190, 270 )
+
+[node name="moveable6" parent="moveables/row3" instance=ExtResource( 5 )]
+position = Vector2( 190, 430 )
+
+[node name="moveable2" parent="moveables/row3" instance=ExtResource( 5 )]
+position = Vector2( 190, 190 )
+
+[node name="moveable3" parent="moveables/row3" instance=ExtResource( 5 )]
+position = Vector2( 190, 350 )
+
+[node name="moveable5" parent="moveables/row3" instance=ExtResource( 5 )]
+position = Vector2( 190, 510 )
 
 [node name="goal" parent="." instance=ExtResource( 6 )]
+editor/display_folded = true
 position = Vector2( 970, 550 )
 
 [node name="win_label" type="Node2D" parent="goal"]
